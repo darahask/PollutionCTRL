@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.pollutionctrl">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_factory"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_factory"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AcardActivity"/>
+        <activity android:name=".AskActivity" android:theme="@style/EAppTheme" android:label="Ask" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".PostActivity" android:theme="@style/EAppTheme" android:label="Create Post" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".NewsActivity" android:label="" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".AskActivity">
+
+            <TextView
+                android:id="@+id/post_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/googlesans"
+                android:background="@drawable/border"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:padding="4dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Write To Us"
+                android:padding="4dp"
+                android:fontFamily="@font/roboto_mono"
+                android:gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="400dp"
+                android:padding="8dp"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/post_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/cantarell"
+                    android:gravity="left"
+                    android:hint="@string/dummy"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="24sp" />
+
+                <ProgressBar
+                    android:id="@+id/my_progress"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_photo_camera"
+        android:layout_margin="8dp"
+        app:elevation="4dp"
+        app:fabSize="normal" />
+
+</FrameLayout>

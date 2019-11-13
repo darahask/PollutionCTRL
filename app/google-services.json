@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "246918128275",
+    "firebase_url": "https://pollutionctrl.firebaseio.com",
+    "project_id": "pollutionctrl",
+    "storage_bucket": "pollutionctrl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246918128275:android:77df62bab7416298236366",
+        "android_client_info": {
+          "package_name": "com.example.pollutionctrl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246918128275-bbp2ghg9ppf6nc9mhdicddqpuh5ohqpn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pollutionctrl",
+            "certificate_hash": "183c61709dac01bc9bb76afb4753a2acc67dc443"
+          }
+        },
+        {
+          "client_id": "246918128275-krv51m8nmolk7g20n0r08ce3t9v41k34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA481XJgXeu59fUJHHHgmFAtKljpsg5Tww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246918128275-krv51m8nmolk7g20n0r08ce3t9v41k34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
