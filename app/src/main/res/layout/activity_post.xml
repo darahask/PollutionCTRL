@@ -28,15 +28,28 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:textStyle="bold"/>
-            <TextView
+            
+            <Spinner
+                android:id="@+id/post_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/post_article_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="Write To Us"
-                android:padding="4dp"
-                android:fontFamily="@font/roboto_mono"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="20sp"
+                android:hint="Article Name"
                 android:gravity="center"
-                />
+                android:background="@drawable/border"
+                android:padding="4dp"
+                android:fontFamily="@font/googlesans"
+                android:textColor="@android:color/background_dark" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

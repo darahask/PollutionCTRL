@@ -13,23 +13,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.pollutionctrl.R;
+import com.example.pollutionctrl.askclasses.AskAdapter;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private Context context;
     private ArrayList<MyData> dataList;
+    private AskAdapter.OnClickFucker onClickFucker;
 
-    public MyAdapter(Context context, ArrayList<MyData> dataList) {
+    public MyAdapter(Context context, ArrayList<MyData> dataList, AskAdapter.OnClickFucker onClickFucker) {
         this.context = context;
         this.dataList = dataList;
+        this.onClickFucker = onClickFucker;
     }
 
     @NonNull
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.cards_layout,parent,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view,onClickFucker);
     }
 
     @Override
@@ -53,19 +57,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return dataList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView t;
         ImageView imageView;
         View itemView;
+        AskAdapter.OnClickFucker onClickFucker;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, AskAdapter.OnClickFucker onClickFucker) {
             super(itemView);
 
             t = itemView.findViewById(R.id.news_text);
             imageView = itemView.findViewById(R.id.news_image);
             this.itemView = itemView;
+            this.onClickFucker = onClickFucker;
 
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickFucker.onClick(getAdapterPosition());
         }
     }
 }

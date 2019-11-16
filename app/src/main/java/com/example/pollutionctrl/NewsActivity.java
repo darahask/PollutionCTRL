@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pollutionctrl.askclasses.AskAdapter;
 import com.example.pollutionctrl.newsdata.AirData;
 import com.example.pollutionctrl.newsdata.MyLoader;
 import com.example.pollutionctrl.recycleview.MyAdapter;
@@ -42,7 +45,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<AirData>, LocationListener {
+public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<AirData>, LocationListener, AskAdapter.OnClickFucker {
 
     private FirebaseDatabase db;
     private DatabaseReference ref;
@@ -81,7 +84,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final MyAdapter adapter = new MyAdapter(this,list);
+        final MyAdapter adapter = new MyAdapter(this,list,this);
         recyclerView.setAdapter(adapter);
 
         listener = new ChildEventListener() {
@@ -197,4 +200,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         t8.setText("Pollutant: " + airData.getMain());
     }
 
+    @Override
+    public void onClick(int position) {
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(position).getLink()));
+        startActivity(i);
+    }
 }

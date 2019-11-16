@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,18 +31,22 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class PostActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     static int RC_PHOTO_PICKER = 11211;
     FirebaseFirestore db;
     FirebaseStorage file;
-    Button button;
+    Spinner spinner;
     FloatingActionButton imageButton;
-    EditText editText;
+    EditText editText,editText2;
     StorageReference storageReference;
     FirebaseUser uName;
     Uri imageUri;
+    String name;
     ProgressBar progressBar;
 
     @Override
@@ -51,6 +58,7 @@ public class PostActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         file = FirebaseStorage.getInstance();
         storageReference = file.getReference().child("post_pics");
+        editText2 = findViewById(R.id.post_article_title);
 
         if(auth.getCurrentUser() != null){
             uName = auth.getCurrentUser();
@@ -59,6 +67,21 @@ public class PostActivity extends AppCompatActivity {
         imageButton = findViewById(R.id.fab);
         editText = findViewById(R.id.post_edit);
         progressBar = findViewById(R.id.my_progress);
+        spinner = findViewById(R.id.post_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spinArray,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                name = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +131,17 @@ public class PostActivity extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             Toast.makeText(PostActivity.this,"Uploaded the Post we will contact you once we accept it",Toast.LENGTH_SHORT)
                                     .show();
-                            PostData postData = new PostData(editText.getText().toString(),uName.getUid(),uri.toString());
-                            db.collection(uName.getUid()).document(). set(postData, SetOptions.merge())
+                            String s = LocalDate.now().toString() +" "+ LocalTime.now().toString() +" " + "UTC+5:30";
+                            PostData postData = new PostData(editText.getText().toString(),uName.getUid(),uri.toString(),uName.getDisplayName(),editText2.getText()
+                            .toString(),s);
+                            db.collection(name).document(). set(postData, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(PostActivity.this,"Done",Toast.LENGTH_SHORT).show();
                                             imageUri = null;
                                             editText.setText("");
+                                            editText2.setText("");
                                             progressBar.setVisibility(View.GONE);
                                         }
                                     });
@@ -126,4 +152,6 @@ public class PostActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

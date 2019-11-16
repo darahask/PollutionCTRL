@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AcardActivity"/>
-        <activity android:name=".AskActivity" android:theme="@style/EAppTheme" android:label="Ask" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".PostActivity" android:theme="@style/EAppTheme" android:label="Create Post" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AcardActivity" android:theme="@style/ActivityTheme" android:label="Query" android:parentActivityName=".AskActivity"/>
+        <activity android:name=".AskActivity" android:theme="@style/ActivityTheme" android:label="Ask" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".PostActivity" android:theme="@style/ActivityTheme" android:label="Create Post" android:parentActivityName=".MainActivity"/>
         <activity android:name=".NewsActivity" android:label="" android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>

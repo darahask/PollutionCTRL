@@ -23,6 +23,7 @@ import com.example.pollutionctrl.askclasses.AskMessage;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -37,7 +38,7 @@ import com.google.firebase.storage.UploadTask;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class AskActivity extends AppCompatActivity {
+public class AskActivity extends AppCompatActivity implements AskAdapter.OnClickFucker{
 
     FirebaseUser user;
     RecyclerView recyclerView;
@@ -48,11 +49,7 @@ public class AskActivity extends AppCompatActivity {
     AskAdapter adapter;
     ChildEventListener listener;
     ArrayList<AskMessage> messageArrayList;
-    ImageButton imageButton;
-    Button button;
-    EditText editText;
-    Uri imageUri;
-    static int RC_PHOTO_PICKER = 11211;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +60,12 @@ public class AskActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         messageArrayList = new ArrayList<>();
 
-        dbRef = firebaseDatabase.getReference().child("askmessages");
+        dbRef = firebaseDatabase.getReference().child("askMessages");
         sRef = firebaseStorage.getReference().child("ask_pics");
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        imageButton = findViewById(R.id.ask_img_button);
-        button = findViewById(R.id.ask_button);
-        editText = findViewById(R.id.ask_edit_text);
         recyclerView = findViewById(R.id.ask_recycler);
+        floatingActionButton = findViewById(R.id.ask_fab);
 
         listener = new ChildEventListener() {
             @Override
@@ -101,84 +96,40 @@ public class AskActivity extends AppCompatActivity {
         };
         dbRef.addChildEventListener(listener);
 
-//        editText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (charSequence.toString().trim().length() > 0) {
-//                    button.setEnabled(true);
-//                } else {
-//                    button.setEnabled(false);
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
-//        editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1000)});
-//
-//        imageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("image/jpeg");
-//                intent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-//                startActivityForResult(Intent.createChooser(intent,"Complete action using"),RC_PHOTO_PICKER);
-//            }
-//        });
-//
-//
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(imageUri != null){
-//                    sRef.child(imageUri.getLastPathSegment()).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                        @Override
-//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                            Task<Uri> task = taskSnapshot.getStorage().getDownloadUrl();
-//                            task.addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                @Override
-//                                public void onSuccess(Uri uri) {
-//                                    Toast.makeText(AskActivity.this,"Image Uploaded",Toast.LENGTH_SHORT).show();
-//                                    String s;
-//                                    if(user != null){
-//                                        s = user.getDisplayName();
-//                                    }else{
-//                                        s = "Anonymous";
-//                                    }
-//
-//                                    AskMessage message = new AskMessage(s, LocalDate.now().toString(),uri.toString(),editText.getText().toString());
-//                                    dbRef.push().setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                        @Override
-//                                        public void onSuccess(Void aVoid) {
-//                                            Toast.makeText(AskActivity.this,"Upload done",Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    });
-//                                }
-//                            });
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AskActivity.this,AcardActivity.class));
+            }
+        });
 
-        adapter = new AskAdapter(this,messageArrayList);
+        adapter = new AskAdapter(this,messageArrayList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(AskActivity.this, AskActivity.class);
+        startActivity(i);
+        this.finish();
+    }
 
-        if(requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK){
-            if(data!=null){
-                imageUri = data.getData();
-            }
-        }
+    @Override
+    public void onClick(int position) {
+        Intent i = new Intent(AskActivity.this,AcardActivity.class);
+        i.putExtra("img",messageArrayList.get(position).getImageUri());
+        i.putExtra("txt",messageArrayList.get(position).getMessage());
+        i.putExtra("img_reply",messageArrayList.get(position).getReplyImageUri());
+        i.putExtra("txt_reply",messageArrayList.get(position).getReplyMessage());
+        i.putExtra("key",messageArrayList.get(position).getKey());
+        i.putExtra("id",messageArrayList.get(position).getId());
+        startActivity(i);
+
+    }
+
+    public ArrayList<AskMessage> getMessageArrayList() {
+        return messageArrayList;
     }
 }

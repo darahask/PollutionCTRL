@@ -16,20 +16,23 @@ import com.example.pollutionctrl.R;
 
 import java.util.ArrayList;
 
-public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskViewHolder> {
+public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskViewHolder>{
+
 
     private Context context;
     private ArrayList<AskMessage> list;
+    private OnClickFucker onClickFucker;
 
-    public AskAdapter(Context context, ArrayList<AskMessage> list) {
+    public AskAdapter(Context context, ArrayList<AskMessage> list, OnClickFucker onClickFucker) {
         this.context = context;
+        this.onClickFucker = onClickFucker;
         this.list = list;
     }
 
     @NonNull
     @Override
     public AskAdapter.AskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AskViewHolder(LayoutInflater.from(context).inflate(R.layout.ask_card,parent,false));
+        return new AskViewHolder(LayoutInflater.from(context).inflate(R.layout.ask_card,parent,false),onClickFucker);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskViewHolder> {
         holder.tm.setText(message.getMessage());
         holder.tl.setText(message.getId());
         holder.tr.setText(message.getDate());
+        holder.ts.setText(message.getStatus());
 
     }
 
@@ -57,19 +61,34 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskViewHolder> {
         notifyDataSetChanged();
     }
 
-    class AskViewHolder extends RecyclerView.ViewHolder{
+    class AskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         View itemView;
         ImageView imageView;
-        TextView tm,tl,tr;
+        TextView tm,tl,tr,ts;
+        OnClickFucker onClickFucker;
 
-        public AskViewHolder(@NonNull View itemView) {
+        public AskViewHolder(@NonNull View itemView, OnClickFucker onClickFucker) {
             super(itemView);
             this.itemView = itemView;
+            this.onClickFucker = onClickFucker;
             imageView = itemView.findViewById(R.id.ask_card_img);
             tm = itemView.findViewById(R.id.ask_message);
             tl = itemView.findViewById(R.id.ask_id);
             tr = itemView.findViewById(R.id.ask_date);
+            ts = itemView.findViewById(R.id.ask_status);
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickFucker.onClick(getAdapterPosition());
         }
     }
+
+    public interface OnClickFucker{
+        void onClick(int position);
+    }
+
 }
