@@ -8,6 +8,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.content.Intent;
@@ -17,12 +19,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.pollutionctrl.myfragments.MyPagerAdapter;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -33,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Menu menu;
-    private TextView textView;
     private FirebaseAuth mAuth;
+
+    FloatingActionButton fab;
+
     private static int REQUEST_CODE = 111;
     final private List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.EmailBuilder().build());
@@ -48,11 +56,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Home");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
 
         drawerLayout = findViewById(R.id.drawer_layout1);
         NavigationView navigationView = findViewById(R.id.nav_view1);
-        textView = findViewById(R.id.textView3);
+        fab = findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,AskActivity.class));
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else if(id == R.id.nav_profile){
                     drawerLayout.closeDrawer(GravityCompat.START);
-                    Uri link = Uri.parse("https://obscure-castle-24161.herokuapp.com/userdetails");
-                    Intent i = new Intent(Intent.ACTION_VIEW,link);
+//                    Uri link = Uri.parse("https://obscure-castle-24161.herokuapp.com/userdetails");
+                    Intent i = new Intent(MainActivity.this,ProfileActivity.class);
                     startActivity(i);
                 }else if(id == R.id.nav_share){
                     drawerLayout.closeDrawer(GravityCompat.START);
@@ -98,16 +113,13 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
         mAuth = FirebaseAuth.getInstance();
 
-    }
+        ViewPager viewPager = findViewById(R.id.home_viewpager);
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        viewPager.setAdapter(myPagerAdapter);
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        if(mAuth.getCurrentUser() != null){
-            textView.setText(mAuth.getCurrentUser().getDisplayName());
-        }else {
-            textView.setText("Not logged in");
-        }
+        TabLayout tabLayout = findViewById(R.id.sliding_tab);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override
@@ -135,12 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }else if(item.getItemId() == R.id.authenticate){
             register();
         }else if(item.getItemId() == R.id.authenticate && item.getTitle() == "Sign Out"){
-            AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    finish();
-                }
-            });
+            AuthUI.getInstance().signOut(this);
         }
 
         return super.onOptionsItemSelected(item);
@@ -161,9 +168,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 111 && resultCode == RESULT_OK){
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             MenuItem item = menu.findItem(R.id.authenticate);
             item.setTitle("Sign Out");
+            startActivity(new Intent(MainActivity.this,QuestionActivity.class));
         }
 
     }

@@ -7,8 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        app:cardElevation="4dp"
         android:layout_height="match_parent"
-        android:padding="3dp">
+        android:padding="2dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -18,7 +19,7 @@
 
             <ImageView
                 android:id="@+id/news_image"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_width = "match_parent"
                 android:layout_height = "250dp"
                 android:scaleType="fitXY"/>

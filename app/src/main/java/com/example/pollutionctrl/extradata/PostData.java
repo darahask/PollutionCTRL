@@ -1,20 +1,27 @@
 package com.example.pollutionctrl.extradata;
 
+import com.google.firebase.Timestamp;
+
+import java.util.Date;
+
 public class PostData {
     private String desp;
     private String _id;
     private String img;
     private String name;
     private String article_name;
-    private String Date;
+    private Timestamp date;
 
-    public PostData(String data, String userUID, String imageUri, String name, String article_name, String date) {
-        this.desp = data;
-        this._id = userUID;
-        this.img = imageUri;
+    public PostData() {
+    }
+
+    public PostData(Timestamp Date, String _id, String article_name, String desp, String img, String name) {
+        this.desp = desp;
+        this._id = _id;
+        this.img = img;
         this.name = name;
         this.article_name = article_name;
-        Date = date;
+        this.date = Date;
     }
 
     public String getData() {
@@ -38,6 +45,6 @@ public class PostData {
     }
 
     public String getDate() {
-        return Date;
+        return date.toDate().toString();
     }
 }

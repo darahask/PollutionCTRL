@@ -96,22 +96,28 @@ public class AcardActivity extends AppCompatActivity {
             name = data.getStringExtra("id");
             key = data.getStringExtra("key");
 
-            Glide.with(this).load(img).into(this.img);
+            if(!img.isEmpty())
+                Glide.with(this).load(img).into(this.img);
+            else
+                this.img.setVisibility(View.GONE);
             this.txt.setText(txt);
 
             this.img_reply.setVisibility(View.VISIBLE);
-            if(img_reply!=null)
+            if(!img_reply.isEmpty()) {
+                this.img_reply.setVisibility(View.VISIBLE);
                 Glide.with(this).load(img_reply).into(this.img_reply);
-            else {
-                this.img_reply.setImageResource(R.drawable.ic_picture);
+            }else {
+                this.img_reply.setVisibility(View.GONE);
             }
             getSupportActionBar().setTitle(name);
             this.key = key;
 
             if(txt_reply == null)
                 this.eTxt.setHint(R.string.dummy);
-            else
+            else {
                 this.eTxt.setText(txt_reply);
+                this.eTxt.setTextSize(20);
+            }
         }
     }
 
@@ -120,6 +126,12 @@ public class AcardActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_acard,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        menu.findItem(R.id.acard_reply).setTitle("Ask");
+        return true;
     }
 
     @Override
@@ -159,6 +171,24 @@ public class AcardActivity extends AppCompatActivity {
                             });
                         }
                     });
+                }else{
+                    String s;
+                    if(user != null){
+                        s = user.getDisplayName();
+                    }else{
+                        s = "Anonymous";
+                    }
+                    DatabaseReference d = dRef.push();
+                    AskMessage msg = new AskMessage(s, LocalDate.now().toString(),"",eTxt.getText().toString(),
+                            null,null,d.getKey(),"Not Answered");
+                    d.setValue(msg).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            pgbar.setVisibility(View.GONE);
+                            Toast.makeText(AcardActivity.this,"Done",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
                 }
             }
         }else if(id == R.id.acard_reply && key!=null && firebaseAuth.getCurrentUser()!=null && replyImageUri != null){
@@ -184,6 +214,19 @@ public class AcardActivity extends AppCompatActivity {
                             });
                         }
                     });
+                }
+            });
+        }else if(id == R.id.acard_reply && key!=null && firebaseAuth.getCurrentUser()!=null && replyImageUri == null){
+            DatabaseReference d = dRef.child(key);
+            AskMessage msg = new AskMessage(data.getStringExtra("id"), LocalDate.now().toString(),
+                    data.getStringExtra("img"),data.getStringExtra("txt"),
+                    "",eTxt.getText().toString(),key,"Answered");
+            d.setValue(msg).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(AcardActivity.this,"Upload done",Toast.LENGTH_SHORT).show();
+                    pgbar.setVisibility(View.GONE);
+                    finish();
                 }
             });
         }

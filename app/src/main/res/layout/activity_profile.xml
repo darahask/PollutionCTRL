@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#0A183D"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@android:color/background_dark"
+        app:cardCornerRadius="8dp"
+        app:cardElevation= "20dp"
+        android:layout_width="370dp"
+        android:layout_height="300dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="304dp"
+            android:padding="8dp">
+
+            <ProgressBar
+                android:id="@+id/prof_prog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/prof_mq"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/cantarell"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"/>
+
+            <EditText
+                android:id="@+id/prof_ma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:hint="Enter value"
+                android:layout_below="@+id/prof_mq" />
+
+            <TextView
+                android:id="@+id/prof_sq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/prof_ma"
+                android:fontFamily="@font/cantarell"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"/>
+
+            <EditText
+                android:id="@+id/prof_sa"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:hint="Enter value"
+                android:layout_below="@+id/prof_sq" />
+
+            <Button
+                android:id="@+id/prof_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:background="@drawable/mybutton"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="4dp"
+                android:onClick="nextQues"
+                android:text="Next" />
+
+            <Button
+                android:id="@+id/prof_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:background="@drawable/mybutton"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="4dp"
+                android:onClick="saveQues"
+                android:text="Save" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

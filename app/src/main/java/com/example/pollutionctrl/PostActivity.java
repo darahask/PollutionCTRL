@@ -23,8 +23,10 @@ import com.example.pollutionctrl.extradata.PostData;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -119,7 +122,7 @@ public class PostActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.post_post){
+        if(id == R.id.post_post && imageUri != null){
             progressBar.setVisibility(View.VISIBLE);
             StorageReference photoRef = storageReference.child(imageUri.getLastPathSegment());
             photoRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -129,16 +132,15 @@ public class PostActivity extends AppCompatActivity {
                     task.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Toast.makeText(PostActivity.this,"Uploaded the Post we will contact you once we accept it",Toast.LENGTH_SHORT)
+                            Toast.makeText(PostActivity.this,"Image Uploaded",Toast.LENGTH_SHORT)
                                     .show();
-                            String s = LocalDate.now().toString() +" "+ LocalTime.now().toString() +" " + "UTC+5:30";
-                            PostData postData = new PostData(editText.getText().toString(),uName.getUid(),uri.toString(),uName.getDisplayName(),editText2.getText()
-                            .toString(),s);
-                            db.collection(name).document(). set(postData, SetOptions.merge())
+                            PostData postData = new PostData(new Timestamp(new Date()),uName.getUid(),editText2.getText().toString()
+                                    ,editText.getText().toString(),uri.toString(),uName.getDisplayName());
+                            db.collection("dummy").document(). set(postData, SetOptions.merge())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Toast.makeText(PostActivity.this,"Done",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PostActivity.this,"Successfully Posted",Toast.LENGTH_SHORT).show();
                                             imageUri = null;
                                             editText.setText("");
                                             editText2.setText("");
@@ -149,6 +151,20 @@ public class PostActivity extends AppCompatActivity {
                     });
                 }
             });
+        }else if(id == R.id.post_post ){
+            PostData postData = new PostData(new Timestamp(new Date()),uName.getUid(),editText2.getText().toString()
+                    ,editText.getText().toString(),"",uName.getDisplayName());
+            db.collection("dummy").document(). set(postData, SetOptions.merge())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(PostActivity.this,"Successfully Posted",Toast.LENGTH_SHORT).show();
+                            imageUri = null;
+                            editText.setText("");
+                            editText2.setText("");
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
         }
         return super.onOptionsItemSelected(item);
     }
