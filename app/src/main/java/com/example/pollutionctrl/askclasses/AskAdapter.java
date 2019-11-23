@@ -44,8 +44,7 @@ public class AskAdapter extends RecyclerView.Adapter<AskAdapter.AskViewHolder>{
         if(!message.getImageUri().isEmpty())
             Glide.with(context).load(message.getImageUri()).into(imageView);
         else{
-            Glide.with(context).load(R.drawable.ic_user1).into(imageView);
-            imageView.setScaleType(ImageView.ScaleType.CENTER);
+            imageView.setVisibility(View.GONE);
         }
 
 

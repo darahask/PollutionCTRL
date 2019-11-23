@@ -3,6 +3,8 @@ package com.example.pollutionctrl;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -17,9 +19,10 @@ import java.util.HashMap;
 
 public class ProfexActivity extends AppCompatActivity {
 
-    TextView t1,t2,t3;
+    TextView t1,t2,t3,t4;
     FirebaseUser user;
     FirebaseFirestore db;
+    SharedPreferences s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class ProfexActivity extends AppCompatActivity {
         t3 = findViewById(R.id.profex_status);
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        s = getPreferences(Context.MODE_PRIVATE);
 
         t1.setText("Welcome, " + user.getDisplayName());
 
@@ -59,6 +63,7 @@ public class ProfexActivity extends AppCompatActivity {
                         t3.setTextColor(Color.RED);
                     }
                 }
+
             }
         });
     }

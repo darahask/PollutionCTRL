@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#dadce0"
     tools:context=".AskActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ask_recycler"
-        android:background="#dadce0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

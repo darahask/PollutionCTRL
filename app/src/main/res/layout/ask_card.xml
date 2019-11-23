@@ -34,12 +34,15 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/googlesans"
                 android:textSize="18sp"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:textColor="@android:color/background_dark"/>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -49,7 +52,6 @@
                     android:layout_weight="1"
                     android:textSize="12sp"
                     android:fontFamily="@font/cantarell"
-                    android:padding="4dp"
                     android:gravity="left"/>
 
                 <TextView
@@ -59,7 +61,6 @@
                     android:layout_weight="1"
                     android:textSize="12sp"
                     android:fontFamily="@font/cantarell"
-                    android:padding="4dp"
                     android:gravity="center"/>
 
                 <TextView
@@ -69,7 +70,6 @@
                     android:layout_weight="1"
                     android:textSize="12sp"
                     android:fontFamily="@font/cantarell"
-                    android:padding="4dp"
                     android:gravity="right"/>
 
             </LinearLayout>
