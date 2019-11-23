@@ -15,19 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProfileActivity"
+        <activity android:name=".ProfexActivity"
+            android:parentActivityName=".ProfileActivity"/>
+        <activity
+            android:name=".LauncherActivity"
+            android:label="@string/title_activity_launcher"
+            android:theme="@style/ActivityTheme2" />
+        <activity
+            android:name=".ProfileActivity"
             android:label="Profile"
-            android:theme="@style/ActivityTheme"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/ActivityTheme3" />
         <activity
             android:name=".HcardActivity"
             android:label="Article"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".QuestionActivity"
-            android:label="Q/A"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/ActivityTheme" />
         <activity
             android:name=".AcardActivity"
             android:label="Query"
@@ -47,7 +49,8 @@
             android:name=".NewsActivity"
             android:label=""
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

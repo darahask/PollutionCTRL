@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#0A183D"
     android:orientation="vertical"
+    android:background="#4F0A183D"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#0A183D"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         app:cardBackgroundColor="@android:color/background_dark"
         app:cardCornerRadius="8dp"
         app:cardElevation= "20dp"
+        android:layout_margin="4dp"
         android:layout_width="370dp"
         android:layout_height="300dp">
 
@@ -39,11 +57,12 @@
 
             <EditText
                 android:id="@+id/prof_ma"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
                 android:textColor="@android:color/white"
-                android:hint="Enter value"
+                android:inputType="numberDecimal"
+                android:textColorHint="@android:color/white"
                 android:layout_below="@+id/prof_mq" />
 
             <TextView
@@ -51,17 +70,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/prof_ma"
-                android:fontFamily="@font/cantarell"
                 android:textColor="@android:color/white"
+                android:fontFamily="@font/cantarell"
                 android:textSize="22sp"/>
 
             <EditText
                 android:id="@+id/prof_sa"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:backgroundTint="@color/colorAccent"
                 android:textColor="@android:color/white"
                 android:layout_height="wrap_content"
-                android:hint="Enter value"
+                android:inputType="numberDecimal"
                 android:layout_below="@+id/prof_sq" />
 
             <Button
@@ -69,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:background="@drawable/mybutton"
+                android:backgroundTint="@color/colorAccent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="4dp"
@@ -81,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:background="@drawable/mybutton"
+                android:backgroundTint="@color/colorAccent"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="4dp"
                 android:onClick="saveQues"
@@ -91,4 +110,16 @@
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/profile_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin = "16dp"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:text="Profile"
+        app:iconTint="@android:color/white"
+        app:icon="@drawable/ic_arrow_forward_black_24dp"/>
+
+</FrameLayout>

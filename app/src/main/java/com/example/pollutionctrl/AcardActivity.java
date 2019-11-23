@@ -103,9 +103,13 @@ public class AcardActivity extends AppCompatActivity {
             this.txt.setText(txt);
 
             this.img_reply.setVisibility(View.VISIBLE);
-            if(!img_reply.isEmpty()) {
-                this.img_reply.setVisibility(View.VISIBLE);
-                Glide.with(this).load(img_reply).into(this.img_reply);
+            if(!(img_reply == null)) {
+                if(!img_reply.isEmpty()){
+                    this.img_reply.setVisibility(View.VISIBLE);
+                    Glide.with(this).load(img_reply).into(this.img_reply);
+                }else{
+                    this.img_reply.setVisibility(View.GONE);
+                }
             }else {
                 this.img_reply.setVisibility(View.GONE);
             }

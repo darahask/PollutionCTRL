@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.pollutionctrl.askclasses.AskAdapter;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 public class AskActivity extends AppCompatActivity implements AskAdapter.OnClickFucker{
 
     FirebaseUser user;
+    ProgressBar pb;
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
     FirebaseStorage firebaseStorage;
@@ -63,13 +65,14 @@ public class AskActivity extends AppCompatActivity implements AskAdapter.OnClick
         dbRef = firebaseDatabase.getReference().child("askMessages");
         sRef = firebaseStorage.getReference().child("ask_pics");
         user = FirebaseAuth.getInstance().getCurrentUser();
-
+        pb = findViewById(R.id.ask_progress);
         recyclerView = findViewById(R.id.ask_recycler);
         floatingActionButton = findViewById(R.id.ask_fab);
 
         listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                pb.setVisibility(View.GONE);
                 AskMessage obj = dataSnapshot.getValue(AskMessage.class);
                 adapter.addData(obj);
             }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DADCE0"
     tools:context=".AcardActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -18,6 +19,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/acard_card"
                 android:layout_width="match_parent"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp">
 
@@ -29,8 +32,9 @@
 
                     <ImageView
                         android:id="@+id/acard_img"
-                        android:padding="2dp"
+                        android:background="@drawable/curvedborder"
                         android:scaleType="fitXY"
+                        android:padding="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="250dp" />
 
@@ -42,8 +46,7 @@
                         android:textSize="20sp"
                         android:fontFamily="@font/cantarell"
                         android:textStyle="bold"
-                        android:textColor="@android:color/background_dark"
-                        android:gravity="center"/>
+                        android:textColor="@android:color/background_dark"/>
 
                 </LinearLayout>
 
@@ -54,6 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="8dp"
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
@@ -64,10 +69,11 @@
 
                     <ImageView
                         android:id="@+id/acard_img_reply"
-                        android:padding="2dp"
+                        android:background="@drawable/curvedborder"
                         android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
+                        android:padding="2dp"
                         android:visibility="gone"/>
 
                     <EditText

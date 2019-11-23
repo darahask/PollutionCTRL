@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,9 +14,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +37,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private Menu menu;
     private FirebaseAuth mAuth;
-
+    private FirebaseFirestore db;
+    private static String CHANNEL_ID = "3823";
     FloatingActionButton fab;
 
     private static int REQUEST_CODE = 111;
@@ -56,8 +65,40 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle("Articles");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser() != null){
+            createNotificationChannel();
+            Intent intent = new Intent(this, ProfexActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            db.collection("cf-data").document(mAuth.getCurrentUser().getUid()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    Double d = (Double) task.getResult().getData().get("cfValue");
+                    String s;
+                    if(d > 5.5){
+                        s = "Your CF is " + d;
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, CHANNEL_ID)
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("UNSAFE EMISSIONS")
+                                .setContentText(s)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(pendingIntent)
+                                .setAutoCancel(true);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                        notificationManager.notify(3823,builder.build());
+                    }
+                }
+            });
+
+        }
 
         drawerLayout = findViewById(R.id.drawer_layout1);
         NavigationView navigationView = findViewById(R.id.nav_view1);
@@ -92,11 +133,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }else if(id == R.id.nav_home){
                     drawerLayout.closeDrawer(GravityCompat.START);
+                    startActivity(new Intent(MainActivity.this,LauncherActivity.class));
+                    finish();
                 }else if(id == R.id.nav_profile){
                     drawerLayout.closeDrawer(GravityCompat.START);
-//                    Uri link = Uri.parse("https://obscure-castle-24161.herokuapp.com/userdetails");
-                    Intent i = new Intent(MainActivity.this,ProfileActivity.class);
-                    startActivity(i);
+                    if(mAuth.getCurrentUser()==null){
+                        register();
+                    }else {
+                        startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                    }
                 }else if(id == R.id.nav_share){
                     drawerLayout.closeDrawer(GravityCompat.START);
                     Intent i = new Intent(Intent.ACTION_SEND);
@@ -111,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         checkPermission();
-        mAuth = FirebaseAuth.getInstance();
+
 
         ViewPager viewPager = findViewById(R.id.home_viewpager);
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -171,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             MenuItem item = menu.findItem(R.id.authenticate);
             item.setTitle("Sign Out");
-            startActivity(new Intent(MainActivity.this,QuestionActivity.class));
         }
 
     }
@@ -188,5 +232,20 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

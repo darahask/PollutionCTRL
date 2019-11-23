@@ -21,4 +21,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_launcher">LauncherActivity</string>
+    <string name="large_text">
+        Sooner or later, we will have to recognise that the Earth has rights, too, to live without pollution.
+        What mankind must know is that human beings cannot live without Mother Earth, but the planet can live without humans.
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="fafa">"COPYRIGHT 2019 ALL RIGHTS RESERVED \n""Visit our website for more details"
+    </string>
+    <string name="channel_name">cf_alert</string>
+    <string name="channel_description">pings user about their cf</string>
 </resources>

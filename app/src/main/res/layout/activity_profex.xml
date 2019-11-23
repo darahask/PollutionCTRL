@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfexActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/profex_headname"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:text="Welcome"
+                android:textStyle="bold"
+                android:fontFamily="@font/googlesans"
+                android:gravity="center"
+                android:textSize="32sp"
+                android:textColor="@android:color/white"
+                android:background="#08192D"/>
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:background="#0A183D"
+                android:layout_width="match_parent"
+                android:layout_height="350dp">
+
+                <ImageView
+                    android:id="@+id/l_im"
+                    android:layout_width="210dp"
+                    android:layout_height="210dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="150dp"
+                    android:src="@drawable/index"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Profile "
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_centerInParent="true"
+                    android:textSize="32sp"
+                    android:layout_below="@+id/l_im"
+                    android:textColor="@color/colorAccent"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Emissions Today "
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="50dp"
+                    android:textSize="32sp"
+                    android:textColor="#0A183D"/>
+
+                <TextView
+                    android:id="@+id/profex_ue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="loading..."
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:layout_marginTop="50dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:textSize="32sp"
+                    android:textColor="#0A183D"/>
+
+                <TextView
+                    android:id="@+id/profex_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="loading..."
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:textSize="18sp"
+                    android:textColor="#0A183D"
+                    android:layout_marginBottom="55dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save Earth"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="70dp"
+                    android:textSize="28sp"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/large_text"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pollution Control"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="50dp"
+                    android:textSize="32sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fafa"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="70dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

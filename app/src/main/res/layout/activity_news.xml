@@ -8,7 +8,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/collapse_app_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="235dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -32,17 +32,17 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:layout_marginStart="20dp"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/dTextView1"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
+                            android:layout_height="125dp"
                             android:fontFamily="@font/googlesans"
                             android:textColor="@android:color/white"
                             android:textSize="62sp"
-                            android:gravity="center"
-                            android:layout_weight="1"/>
+                            android:gravity="center"/>
 
                         <TextView
                             android:id="@+id/dTextView2"
@@ -51,9 +51,9 @@
                             android:textColor="@android:color/white"
                             android:gravity="center"
                             android:fontFamily="@font/googlesans"
-                            android:textSize="24sp"
+                            android:textSize="26sp"
                             android:padding="4dp"
-                            android:layout_marginBottom="7dp"/>
+                            android:layout_marginBottom="4dp"/>
 
                         <TextView
                             android:id="@+id/dTextView3"
@@ -61,7 +61,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/white"
                             android:gravity="center"
-                            android:textSize="16sp"
+                            android:textSize="22sp"
                             android:fontFamily="@font/googlesans"
                             android:padding="4dp"
                             android:layout_marginBottom="3dp"/>
@@ -74,6 +74,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:layout_marginLeft="60dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -81,11 +82,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:textColor="@android:color/white"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layout_weight="1"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:fontFamily="@font/googlesans"
-                            android:padding="4dp"/>
+                            android:paddingLeft="4dp"/>
 
                         <TextView
                             android:id="@+id/dTextView5"
@@ -93,8 +94,9 @@
                             android:layout_height="0dp"
                             android:fontFamily="@font/googlesans"
                             android:textColor="@android:color/white"
-                            android:gravity="center"
-                            android:textSize="16sp"
+                            android:gravity="left"
+                            android:textSize="18sp"
+                            android:paddingLeft="4dp"
                             android:layout_weight="1"/>
 
                         <TextView
@@ -103,9 +105,10 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/googlesans"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:textColor="@android:color/white"
-                            android:textSize="16sp" />
+                            android:paddingLeft="4dp"
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/dTextView7"
@@ -113,8 +116,9 @@
                             android:layout_height="0dp"
                             android:fontFamily="@font/googlesans"
                             android:textColor="@android:color/white"
-                            android:gravity="center"
-                            android:textSize="16sp"
+                            android:gravity="left"
+                            android:textSize="18sp"
+                            android:paddingLeft="4dp"
                             android:layout_weight="1"/>
 
                         <TextView
@@ -123,8 +127,9 @@
                             android:layout_height="0dp"
                             android:fontFamily="@font/googlesans"
                             android:textColor="@android:color/white"
-                            android:gravity="center"
-                            android:textSize="16sp"
+                            android:gravity="left"
+                            android:textSize="18sp"
+                            android:paddingLeft="4dp"
                             android:layout_weight="1"/>
 
                     </LinearLayout>
@@ -133,19 +138,13 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/collapse_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"/>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler"
-        android:background="#ECECEC"
+        android:background="#dadce0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"

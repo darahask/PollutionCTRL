@@ -76,9 +76,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        Toolbar toolbar = findViewById(R.id.collapse_toolbar);
-        setSupportActionBar(toolbar);
-
         db = FirebaseDatabase.getInstance();
         ref = db.getReference().child("news_data");
 
@@ -192,7 +189,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     private void updateUI(AirData airData){
         t1.setText(airData.getTp() + " C");
         t2.setText(airData.getName());
-        t3.setText("AirQuality: " + airData.getAqi());
+        t3.setText("AQI: " + airData.getAqi());
         t4.setText("Humidity: " + airData.getHm());
         t5.setText("Pressure: " + airData.getPr());
         t6.setText("WindSpeed: " + airData.getWs());

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.pollutionctrl.qdata.QData;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseDatabase rDb;
     FirebaseUser user;
+    ExtendedFloatingActionButton fab;
     DatabaseReference databaseReference;
     ProgressBar progressBar;
     EditText e1, e2;
@@ -54,6 +57,15 @@ public class ProfileActivity extends AppCompatActivity {
         databaseReference = rDb.getReference().child("cf_ques");
         data = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        getSupportActionBar().setTitle("Welcome, " + user.getDisplayName());
+        fab = findViewById(R.id.profile_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this,ProfexActivity.class));
+                finish();
+            }
+        });
 
         t1 = findViewById(R.id.prof_mq);
         e1 = findViewById(R.id.prof_ma);
@@ -63,18 +75,26 @@ public class ProfileActivity extends AppCompatActivity {
         b2 = findViewById(R.id.prof_save);
         progressBar = findViewById(R.id.prof_prog);
 
+        Toast.makeText(this,"Enter the values in kms and hrs only",Toast.LENGTH_LONG).show();
+
+        b2.setVisibility(View.GONE);
+        b.setText("Go!");
+        b.setVisibility(View.GONE);
+        t1.setText("Please Answer the Questions");
+        e1.setVisibility(View.GONE);
+        e2.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                progressBar.setVisibility(View.VISIBLE);
+                b.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
                 QData d = dataSnapshot.getValue(QData.class);
                 if(d == null){
                     data.add(new QData("Null","NUll","0.00"));
                 }else {
                     data.add(d);
-                }
-                if(data.size() == 13){
-                    progressBar.setVisibility(View.GONE);
                 }
             }
 
@@ -98,12 +118,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-
-        b2.setVisibility(View.GONE);
-        b.setText("Go!");
-        t1.setText("Please Answer the Questions");
-        e1.setVisibility(View.GONE);
-        e2.setVisibility(View.GONE);
 
     }
 
@@ -129,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(ProfileActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProfileActivity.this,ProfexActivity.class));
                     finish();
                 }
             });
@@ -137,6 +152,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void nextQues(View view){
+        e1.setText("");
+        e2.setText("");
        if(index < data.size()){
            b2.setVisibility(View.VISIBLE);
            e1.setVisibility(View.VISIBLE);

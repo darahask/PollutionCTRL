@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".LauncherActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/launch_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".LauncherActivity"
+        tools:showIn="@layout/activity_launcher">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:text="Pollution CTRL"
+                android:textStyle="bold"
+                android:fontFamily="@font/googlesans"
+                android:gravity="center"
+                android:textSize="50sp"
+                android:textColor="@android:color/white"
+                android:background="#08192D"/>
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:background="#0A183D"
+                android:layout_width="match_parent"
+                android:layout_height="350dp">
+
+                <ImageView
+                    android:id="@+id/l_im"
+                    android:layout_width="210dp"
+                    android:layout_height="210dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/index"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save Nature"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_centerInParent="true"
+                    android:textSize="32sp"
+                    android:layout_below="@+id/l_im"
+                    android:textColor="@color/colorAccent"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="How to control pollution through our app?"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="50dp"
+                    android:textSize="32sp"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/googlesans"
+                    android:gravity="center"
+                    android:text="Create account"
+                    android:textColor="#0A183D"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Spread Awareness"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="40dp"
+                    android:textSize="26sp"
+                    android:textColor="#0A183D"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="Contribute and Save"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="@font/googlesans"
+                    android:textSize="26sp"
+                    android:textColor="#0A183D"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="#0A183D"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Why Register With Us"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="40dp"
+                    android:textSize="32sp"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Queries"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="40dp"
+                    android:textSize="26sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="Suggestions"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:textSize="26sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/googlesans"
+                    android:gravity="center"
+                    android:text="Your Emissions"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/googlesans"
+                    android:gravity="center"
+                    android:text="Track and Compare"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="News and Air Quality"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="40dp"
+                    android:textSize="26sp"
+                    android:layout_marginBottom="50dp"
+                    android:textColor="@android:color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DEVELOPED AT"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="50dp"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="IIT Tirupati"
+                    android:textStyle="bold"
+                    android:paddingLeft="9dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DEVELOPERS"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="30dp"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Darahas K"
+                    android:textStyle="bold"
+                    android:paddingLeft="9dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nikhil M"
+                    android:textStyle="bold"
+                    android:paddingLeft="9dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pollution Control"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="30dp"
+                    android:textSize="32sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="COPYRIGHT 2019 ALL RIGHTS RESERVED"
+                    android:textStyle="bold"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="70dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/launcher_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin = "16dp"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:text="Get Started!"
+        app:iconTint="@android:color/white"
+        app:icon="@drawable/ic_arrow_forward_black_24dp"/>
+
+</FrameLayout>
